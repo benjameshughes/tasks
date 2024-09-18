@@ -27,7 +27,7 @@ class CategoryPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user, Category $category): bool
     {
         return auth()->id() === $category->user_id;
     }
