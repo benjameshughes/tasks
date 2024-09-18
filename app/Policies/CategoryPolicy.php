@@ -29,7 +29,7 @@ class CategoryPolicy
      */
     public function create(User $user, Category $category): bool
     {
-        return auth()->id() === $category->user_id;
+        return true;
     }
 
     /**
