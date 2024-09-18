@@ -90,5 +90,17 @@ class UpdateTaskStatus extends Action
                 $this->failure();
             }
         });
+
+        $this->visible(function (Task $record): bool
+        {
+            // Check is user is the owner of the task
+            if (!Auth::check() || Auth::user()->id !== $record->user_id) {
+                return false;
+            }
+
+            $user = Auth::user();
+
+            return $user->can('update', $record);
+        });
     }
 }
