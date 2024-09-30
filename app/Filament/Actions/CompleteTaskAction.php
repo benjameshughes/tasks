@@ -6,7 +6,6 @@ use App\Enums\Status;
 use App\Models\Task;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithRecord;
-use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Database\Eloquent\Model;
 
 class CompleteTaskAction extends Action

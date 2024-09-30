@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Enums\Priority;
 use App\Enums\Status;
+use App\Filament\Actions\AssignUserBulkAction;
+use App\Filament\Actions\AssignUserAction;
 use App\Filament\Actions\UpdateTaskStatus;
 use App\Filament\Resources\TaskResource\Pages;
 use App\Filament\Resources\TaskResource\RelationManagers;
@@ -101,14 +103,9 @@ class TaskResource extends Resource
                     ->sortable()
                     ->badge(),
             ])
-            ->defaultGroup('status')
             ->groups([
                 Group::make('status')->collapsible()->getLabel(),
                 Group::make('priority')->collapsible()->getLabel()])
-            ->recordClasses(fn (Task $record) => match ($record->status){
-                'backlog' => 'p-20',
-                default => null,
-            })
             ->filters([
                 Tables\Filters\SelectFilter::make('category')
                     ->relationship('category', 'name'),
@@ -122,12 +119,13 @@ class TaskResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make()->iconButton()->modal(),
                 UpdateTaskStatus::make('Status'),
+                AssignUserAction::make('Assign User'),
 //                CompleteTaskAction::make(),
             ])
             ->bulkActions([
-                // Tables\Actions\DeleteBulkAction::make(),
+                 Tables\Actions\DeleteBulkAction::make(),
+                AssignUserBulkAction::make('Assign User'),
             ])
-            ->selectable(false)
             ->reorderable()
             ->extremePaginationLinks();
     }

@@ -2,15 +2,10 @@
 
 namespace App\Filament\Resources\TaskResource\Pages;
 
-use App\Enums\Status;
-use App\Filament\Actions\CompleteTaskAction;
 use App\Filament\Resources\TaskResource;
-use App\Models\Task;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
-use Livewire\Livewire;
-use Mockery\Matcher\Not;
 
 class EditTask extends EditRecord
 {

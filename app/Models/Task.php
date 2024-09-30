@@ -7,6 +7,7 @@ use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Task extends Model
 {
@@ -20,9 +21,9 @@ class Task extends Model
      * Relationships
      */
 
-    public function category(): BelongsToMany
+    public function category(): HasOne
     {
-        return $this->belongsToMany(Category::class);
+        return $this->hasOne(Category::class);
     }
 
     public function user(): BelongsToMany

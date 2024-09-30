@@ -37,7 +37,7 @@ class TaskPolicy
      */
     public function update(User $user, Task $task): bool
     {
-        return auth()->id() === $task->user_id;
+        return true;
     }
 
     /**

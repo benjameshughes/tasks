@@ -8,7 +8,6 @@ use App\Models\Task;
 use App\Notifications\TaskUpdated;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
@@ -93,14 +92,7 @@ class UpdateTaskStatus extends Action
 
         $this->visible(function (Task $record): bool
         {
-            // Check is user is the owner of the task
-            if (!Auth::check() || Auth::user()->id !== $record->user_id) {
-                return false;
-            }
-
-            $user = Auth::user();
-
-            return $user->can('update', $record);
+            return auth()->user()->can(['view','update'], $record);
         });
     }
 }
